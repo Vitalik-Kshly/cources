@@ -1,5 +1,17 @@
 #include "list.h"
 
+
+static char ***get_element_by_index(char ***listHead, int index){
+
+    char ***temp = listHead;
+    for (int i = 0; i < index - 1; i++)
+    {
+        temp = (char ***)temp[1];
+    }
+    return temp;
+}
+
+
 int get_list_length(char ***listHead)
 {
     if (!listHead)
@@ -21,21 +33,20 @@ void remove_string_from_list(char ***&listHead, int index)
     }
     if (index == 0)
     {
-        listHead = (char ***) listHead[1];
+        char *temp = **listHead;
+        listHead = (char ***)(listHead)[1];
+        free(temp);
         return;
     }
-    char ***temp = listHead;
-    for (int i = 0; i < index - 1; i++)
-    {
-        temp = (char ***)temp[1];
-    }
+    char ***temp = get_element_by_index(listHead, index);
+    
     char ***prev = temp;
     char ***next = (char ***)((temp[1]))[1];
     free(temp[1]);
     prev[1] = (char **) next;
 }
 
-void push_item(char ***&listHead, char ***item)
+void push_item(char ***listHead, char ***item)
 {
     if (!listHead){
         listHead = item;
@@ -65,7 +76,7 @@ void add_elements(char ***listHead)
     std::cin >> n;
     for (int i = 0; i < n; i++)
     {
-        char *str = (char *)malloc(255);
+        char *str = (char *)malloc(STR_LENGTH);
         std::cin >> str;
         char ***tempNode = build_node(str);
         push_item(listHead, tempNode);
@@ -75,7 +86,7 @@ void add_elements(char ***listHead)
 char*** init_list()
 {
     
-    char* firstElement = (char *) malloc(255);
+    char* firstElement = (char *) malloc(STR_LENGTH);
     printf("Enter the first element:\n");
     std::cin >> firstElement;
     char ***listHead = build_node(firstElement);
@@ -127,8 +138,18 @@ void display_list(char ***listHead)
     std::cout << index << ". " << **curElem << std::endl;
 }
 
-void sort_list(char ***&listHead)
+void replace_string(char ***listHead, int index)
 {
+    char * newStr = (char *)malloc(STR_LENGTH);
+    std::cout << "Enter new string: ";
+    std::cin >> newStr;
+    char ***temp = get_element_by_index(listHead, index);
+    *temp[0] = newStr;
+}
+
+void sort_list(char ***listHead)
+{
+    //Sorts the list 
     int listLength = get_list_length(listHead);
     char ***curNode = nullptr;
     bool swapped;
@@ -138,20 +159,17 @@ void sort_list(char ***&listHead)
         char ***tempNode = listHead;
         while (tempNode[1] != (char **)curNode)
         {
-            if (!*(char ***) tempNode[1])
+            if (!*tempNode[1])
                 break;
             if (strcmp(*tempNode[0], **(char ***)tempNode[1]) > 0)
                 {
-                    std::cout << "Shit: " << *tempNode[0] << ' ' << (char ***) *tempNode[1] << std::endl;
-                    char *tempStr = (char *) malloc(255);
-                    // char *str1[100];
-                    // tempStr = *(tempNode[0]);
-                    // *(tempNode[0]) = *(tempNode[1]);
-                    
+                    std::cout << "Shit: " << *tempNode[0] << ' ' << **(char ***)tempNode[1] << std::endl;
+                    char *tempStr = (char *) malloc(STR_LENGTH);
+                    //Swap values
                     strncpy(tempStr, *tempNode[0], sizeof(*tempNode[0]));
                     strncpy(*(tempNode[0]), **(char ***)tempNode[1], sizeof(**(char ***)tempNode[1]));
-                    
                     strncpy(**(char ***)tempNode[1], tempStr, sizeof(tempStr));
+
                     free(tempStr);
                     swapped = 1;
                 }

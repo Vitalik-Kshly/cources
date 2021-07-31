@@ -1,5 +1,12 @@
 #include "list.h"
 
+int get_index(){
+    std::cout << "Enter the index:\n";
+    int index;
+    std::cin >> index;
+    return index;
+}
+
 void menu(char ***listHead)
 {
     int choice = 0;
@@ -14,6 +21,7 @@ void menu(char ***listHead)
         printf("Enter 5 to get the length of the list.\n");
         printf("Enter 6 to remove the string by index.\n");
         printf("Enter 7 to sort list.\n");
+        printf("Enter 8 to replace string by index.\n");
         printf("Enter -1 to exit.\n");
         std::cin >> choice;
 
@@ -54,15 +62,18 @@ void menu(char ***listHead)
         case 6:
         {
             display_list(listHead);
-            std::cout << "Enter the index:\n";
-            int tempindex;
-            std::cin >> tempindex;
-            remove_string_from_list(listHead, tempindex);
+            remove_string_from_list(listHead, get_index());
 
             break;
         }
         case 7:
+            display_list(listHead);
             sort_list(listHead);
+            display_list(listHead);
+            break;
+        case 8:
+            display_list(listHead);
+            replace_string(listHead, get_index());
             display_list(listHead);
             break;
         default:
