@@ -12,104 +12,121 @@ static char ***get_element_by_index(char ***listHead, int index){
 }
 
 
-int get_list_length(char ***listHead)
+int get_list_length(char **listHead)
 {
     if (!listHead)
         return 0;
-    char ***temp = listHead;
+    char **temp = listHead;
     int index = 1;
-    while (*(temp[1])!=nullptr) {
-        temp = (char ***)temp[1];
+    while (temp[1] != nullptr) {
+        temp = (char **)temp[1];
         index++;
     }
     return index;
 }
 
-void remove_string_from_list(char ***&listHead, int index)
+void StringListRemove(char ***listHead, string str)
 {
-    if (!listHead){
+    if (!listHead[0]){
         printf("List is empty! Stop it!");
         return;
     }
-    if (index == 0)
+
+    char **temp = *listHead;
+    
+    
+    while (temp != NULL)
     {
-        char *temp = **listHead;
-        listHead = (char ***)(listHead)[1];
-        free(temp);
+        
+        if (strcmp(*listHead[0], str) == 0)
+        {
+            char *clear = **listHead;
+            *listHead = (char **)(*listHead)[1];
+            free(clear);
+            temp = *listHead;
+            continue;
+        }
+        
+        if(temp[1] == NULL)
+            break;
+        char **cur = (char **)temp[1];
+        char **next = (char **)cur[1];
+        if (strcmp(*cur, str) == 0){
+            temp[1] = (char *)next;
+            free(cur);
+            cur = NULL;
+        }
+        else
+            temp = (char **)temp[1];
+
+    }
+}
+
+void StringListAdd(char** listHead, string str)
+{
+    if (listHead[0] == NULL || listHead == NULL){
+        *listHead = str;
         return;
     }
-    char ***temp = get_element_by_index(listHead, index);
-    
-    char ***prev = temp;
-    char ***next = (char ***)((temp[1]))[1];
-    free(temp[1]);
-    prev[1] = (char **) next;
-}
-
-void push_item(char ***listHead, char ***item)
-{
-    if (!listHead){
-        listHead = item;
-        return;
+    char **temp = listHead;
+    while (temp[1] != nullptr) {
+        temp = (char **)temp[1];
     }
-    char ***temp = listHead;
-    while (*(temp[1])!=nullptr) {
-        temp = (char ***)temp[1];
-    }
-    temp[1] = (char **)item;
+    char **node = NULL;
+    StringListInit(&node);
+    node[0] = str;
+    temp[1] = (char *)node;
 }
 
-char*** build_node(char *str)
+static void build_node(char *** node)
 {
-    char ***node = (char***) malloc(2*sizeof(char*));
-    node[0] = (char**)malloc(sizeof(char*));
-    node[1] = (char**)malloc(sizeof(char*));
-    *(node[0]) = str;
-    *(node[1]) = nullptr;
-    return node;
+    *node = (char**) malloc(2*sizeof(char*));
+    (*node)[0] = (char*)malloc(sizeof(char*));
+    (*node)[1] = (char*)malloc(sizeof(char*));
+    (*node)[0] = NULL;
+    (*node)[1] = NULL;
 }
 
-void add_elements(char ***listHead)
+// void add_elements(char ***listHead)
+// {
+//     printf("Enter count of elements:\n");
+//     int n;
+//     std::cin >> n;
+//     for (int i = 0; i < n; i++)
+//     {
+//         char *str = (char *)malloc(STR_LENGTH);
+//         std::cin >> str;
+//         char ***tempNode = build_node(str);
+//         push_item(listHead, tempNode);
+//     }
+// }
+
+void StringListInit(char*** listHead)
 {
-    printf("Enter count of elements:\n");
-    int n;
-    std::cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        char *str = (char *)malloc(STR_LENGTH);
-        std::cin >> str;
-        char ***tempNode = build_node(str);
-        push_item(listHead, tempNode);
-    }
+    *listHead = (char **)malloc(sizeof (char *) * 2);
+    (*listHead)[0] = (char*)malloc(sizeof(char*));
+    (*listHead)[1] = (char*)malloc(sizeof(char*));
+    (*listHead)[0] = NULL;
+    (*listHead)[1] = NULL;
 }
 
-char*** init_list()
-{
-    
-    char* firstElement = (char *) malloc(STR_LENGTH);
-    printf("Enter the first element:\n");
-    std::cin >> firstElement;
-    char ***listHead = build_node(firstElement);
-    return listHead;
-}
-
-void get_first_match_index(char ***listHead, char *str)
+void get_first_match_index(char **listHead, string str)
 {
     bool match = 0;
     int tempi = 0;
-    char ***temp = listHead;
+    char **temp = listHead;
     std::cout << str << "\n";
     
     while (temp[1] != nullptr) {
-        if (!strcmp(**temp, str))
+        if (!strcmp(*temp, str))
         {
             match = 1;
             break;
         }
         tempi++;
-        temp = (char ***)temp[1];
+        temp = (char **)temp[1];
     }
-    match = !strcmp(**temp, str);;
+    match = !strcmp(*temp, str);;
     if (!match)
         {
             std::cout << "There is no matches of " << str << '\n'; 
@@ -118,24 +135,24 @@ void get_first_match_index(char ***listHead, char *str)
     std::cout << "The index of first match for " << str << " is " << tempi << '\n'; 
 }
 
-void display_list(char ***listHead)
+void display_list(char **listHead)
 {
-    if (!(*listHead))
+    if (listHead == NULL || listHead[0] == NULL)
     {
         printf("List is empty!\n");
         return;
     }
-    char ***curElem = listHead;
+    char **curElem = listHead;
     printf("Items of the list:\n");
     int index = 0;
-    while (*(curElem[1]) != nullptr)
+    while (curElem[1] != nullptr)
     {
-        std::cout << index << ". " << **curElem << std::endl;
-        curElem = (char ***)curElem[1];
+        std::cout << index << ". " << *curElem << std::endl;
+        curElem = (char **)curElem[1];
         index++;
     }
 
-    std::cout << index << ". " << **curElem << std::endl;
+    std::cout << index << ". " << *curElem << std::endl;
 }
 
 void replace_string(char ***listHead, int index)
@@ -147,36 +164,40 @@ void replace_string(char ***listHead, int index)
     *temp[0] = newStr;
 }
 
-void sort_list(char ***listHead)
+void sort_list(char **listHead)
 {
     //Sorts the list 
     int listLength = get_list_length(listHead);
-    char ***curNode = nullptr;
+    char **curNode = (char **)malloc(1);
+    curNode[0] = (char *)malloc(1);
+    curNode[0] = NULL;
     bool swapped;
     do
     {
         swapped = 0;
-        char ***tempNode = listHead;
-        while (tempNode[1] != (char **)curNode)
+        char **tempNode = listHead;
+        while (tempNode[1] != (char *)curNode)
         {
-            if (!*tempNode[1])
+            if (!tempNode[1])
                 break;
-            if (strcmp(*tempNode[0], **(char ***)tempNode[1]) > 0)
+            
+            if (strcmp(*tempNode, *(char **) tempNode[1]) > 0)
                 {
-                    std::cout << "Shit: " << *tempNode[0] << ' ' << **(char ***)tempNode[1] << std::endl;
-                    char *tempStr = (char *) malloc(STR_LENGTH);
+                    std::cout << "Shit: " << tempNode[0] << ' ' << *(char **) tempNode[1] << std::endl;
+                    char *tempStr = (char *) malloc(sizeof(tempNode[0]));
+                    
                     //Swap values
-                    strncpy(tempStr, *tempNode[0], sizeof(*tempNode[0]));
-                    strncpy(*(tempNode[0]), **(char ***)tempNode[1], sizeof(**(char ***)tempNode[1]));
-                    strncpy(**(char ***)tempNode[1], tempStr, sizeof(tempStr));
+                    strncpy(tempStr, tempNode[0], sizeof(tempNode[0]));
+                    strncpy(tempNode[0], *(char **) tempNode[1], sizeof(*(char **) tempNode[1]));
+                    strncpy(*(char **) tempNode[1], tempStr, sizeof(tempStr));
 
                     free(tempStr);
                     swapped = 1;
                 }
                 
-            tempNode = (char ***)tempNode[1];
+            tempNode = (char **)tempNode[1];
         }
-        curNode = (char***) tempNode[1];
+        curNode = (char**) tempNode[1];
     }while(swapped);
 
 }
