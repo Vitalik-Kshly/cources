@@ -10,10 +10,10 @@ void menu(char **listHead)
         printf("Enter 1 to push a string.\n");
         printf("Enter 2 to display a list.\n");
         printf("Enter 3 to find the index of exact match.\n");
-        printf("Enter 5 to get the length of the list.\n");
-        printf("Enter 6 to remove the string by index.\n");
-        printf("Enter 7 to sort list.\n");
-        printf("Enter 8 to replace string by index.\n");
+        printf("Enter 4 to get the length of the list.\n");
+        printf("Enter 5 to remove the strings.\n");
+        printf("Enter 6 to sort list.\n");
+        printf("Enter 7 to replace string.\n");
         printf("Enter -1 to exit.\n");
         std::cin >> choice;
 
@@ -39,15 +39,15 @@ void menu(char **listHead)
                 printf("Enter your string:\n");
                 char *tempStr = (char *)malloc(255);
                 std::cin >> tempStr;
-                get_first_match_index(listHead, tempStr);
+                StringListIndexOf(listHead, tempStr);
                 break;
             }
-        case 5:
+        case 4:
         {
-            std::cout << "List length is " << get_list_length(listHead) << std::endl;
+            std::cout << "List length is " << StringListSize(listHead) << std::endl;
             break;
         }
-        case 6:
+        case 5:
         {
             display_list(listHead);
             string str = (string) malloc(STR_LENGTH);
@@ -57,16 +57,29 @@ void menu(char **listHead)
             display_list(listHead);
             break;
         }
+        case 6:
+        {
+            display_list(listHead);
+            StringListSort(listHead);
+            display_list(listHead);
+            break;
+        }
+            
         case 7:
+        {
             display_list(listHead);
-            sort_list(listHead);
+            string newStr = (char *)malloc(STR_LENGTH);
+            string oldStr = (char *)malloc(STR_LENGTH);
+            std::cout << "Enter old string: ";
+            std::cin >> oldStr;
+            std::cout << "Enter new string: ";
+            std::cin >> newStr;
+            StringListReplaceInStrings(listHead, oldStr, newStr);
+            free(newStr);
+            free(oldStr);
             display_list(listHead);
             break;
-        case 8:
-            display_list(listHead);
-            // replace_string(listHead);
-            display_list(listHead);
-            break;
+        }
         default:
             continue;
         }
@@ -77,11 +90,6 @@ int main()
 {   
     char **listHead = NULL;
     StringListInit(&listHead);
-    // StringListAdd(listHead, "AAA");
-    // StringListAdd(listHead, "AAB");
-    // StringListAdd(listHead, "AAA");
-    // StringListAdd(listHead, "FFF");
-    // StringListAdd(listHead, "aVBA");
     menu(listHead);
 
     return 0;

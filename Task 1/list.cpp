@@ -1,7 +1,8 @@
 #include "list.h"
 
 
-static char ***get_element_by_index(char ***listHead, int index){
+static char ***get_element_by_index(char ***listHead, int index)
+{
 
     char ***temp = listHead;
     for (int i = 0; i < index - 1; i++)
@@ -12,7 +13,7 @@ static char ***get_element_by_index(char ***listHead, int index){
 }
 
 
-int get_list_length(char **listHead)
+int StringListSize(char **listHead)
 {
     if (!listHead)
         return 0;
@@ -110,7 +111,7 @@ void StringListInit(char*** listHead)
     (*listHead)[1] = NULL;
 }
 
-void get_first_match_index(char **listHead, string str)
+void StringListIndexOf(char **listHead, string str)
 {
     bool match = 0;
     int tempi = 0;
@@ -155,19 +156,21 @@ void display_list(char **listHead)
     std::cout << index << ". " << *curElem << std::endl;
 }
 
-void replace_string(char ***listHead, int index)
+void StringListReplaceInStrings(char** listHead, string before, string after)
 {
-    char * newStr = (char *)malloc(STR_LENGTH);
-    std::cout << "Enter new string: ";
-    std::cin >> newStr;
-    char ***temp = get_element_by_index(listHead, index);
-    *temp[0] = newStr;
+    
+    char **temp = listHead;
+    while (temp != NULL)
+    {
+        if (strcmp(*temp, before) == 0)
+            strncpy(*temp, after, sizeof(after));
+        temp = (char **)temp[1];
+    }
 }
 
-void sort_list(char **listHead)
+void StringListSort(char **listHead)
 {
     //Sorts the list 
-    int listLength = get_list_length(listHead);
     char **curNode = (char **)malloc(1);
     curNode[0] = (char *)malloc(1);
     curNode[0] = NULL;
@@ -201,3 +204,4 @@ void sort_list(char **listHead)
     }while(swapped);
 
 }
+
