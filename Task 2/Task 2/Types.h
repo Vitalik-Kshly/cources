@@ -3,8 +3,8 @@
 union types
 {
 	int typeInteger;
-	char typeChar;
-	float typeFloat;
+	char* typeChar;
+	double typeFloat;
 	bool typeBool;
 };
 
@@ -13,22 +13,33 @@ enum TypesEnum
 	NoType,
 	typeInteger,
 	typeChar,
-	typeFloat,
+	typeDouble,
 	typeBool
 };
+
+
 
 class Types
 {
 public:
-	Types();
+	template <typename T>Types(T const& i);
 	~Types();
-	Types operator=(const int i);
-	Types operator=(const char i);
-	Types operator=(const float i);
-	Types operator=(const bool i);
+	void operator=(int i);
+	void operator=(char *i);
+	void operator=(double i);
+	void operator=(bool i);
+	int ToInt();
+	char* ToChar();
+	float ToDouble();
+	bool ToBool();
+	int ChosenType;
+	types Type;
+
+	static void Swap(Types* a, Types* b);
 private:
-	types type;
-	TypesEnum types;
+	
+	TypesEnum _types;
+	bool _isCorrectType(int type);
 	
 };
 
