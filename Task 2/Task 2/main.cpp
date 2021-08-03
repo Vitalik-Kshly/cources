@@ -1,8 +1,9 @@
-#include <iostream>
-
+#include "Types.h"
 
 int main() 
 {
-	std::cout << "Hello world";
+	Types type = Types();
+	type = 122;
+	std::cout << type;
 	return 0;
 }
