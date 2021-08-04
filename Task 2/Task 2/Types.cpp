@@ -8,48 +8,73 @@ class TypeError : public std::exception
 };
 
 
-void Types::operator=(const int i)
+void Types::operator=( int i)
 {
 	this->Type.typeInteger = i;
 	this->ChosenType = typeInteger;
 }
 
-void Types::operator=(char *i) 
+void Types::operator=(char i) 
 {
 	this->Type.typeChar = i;
 	this->ChosenType = typeChar;
 }
 
-void Types::operator=(const double i)
+void Types::operator=(double i)
 {
 	this->Type.typeFloat = i;
 	this->ChosenType = typeDouble;
 }
-void Types::operator=(const bool i)
+void Types::operator=(bool i)
 {
 	this->Type.typeBool = i;
 	this->ChosenType = typeBool;
 }
+
+void Types::operator=(float i)
+{
+	this->Type.typeFloat = i;
+	this->ChosenType = typeFloat;
+}
+
+void Types::operator=(unsigned int i)
+{
+	this->Type.typeUInt = i;
+	this->ChosenType = typeUInt;
+}
+
 int Types::ToInt() 
 {
 	this->_isCorrectType(typeInteger);
 	return this->Type.typeInteger;
 }
 
-char* Types::ToChar()
+char Types::ToChar()
 {
 	this->_isCorrectType(typeChar);
 	return this->Type.typeChar;
 }
-float Types::ToDouble()
+double Types::ToDouble()
 {
 	this->_isCorrectType(typeDouble);
-	return this->Type.typeFloat;
+	return this->Type.typeDouble;
 }
 bool Types::ToBool()
 {
 	this->_isCorrectType(typeBool);
 	return this->Type.typeBool;
+}
+
+float Types::ToFloat()
+{
+	this->_isCorrectType(typeFloat);
+	return this->Type.typeFloat;
+}
+
+unsigned int Types::ToUInt()
+{
+	this->_isCorrectType(typeUInt);
+	return this->Type.typeUInt;
 }
 
 bool Types::_isCorrectType(int type)
@@ -69,4 +94,5 @@ void Types::Swap(Types* a, Types* b)
 
 Types::~Types()
 {
+
 }

@@ -1,27 +1,26 @@
 #include "Types.h"
 
-template <typename T>
-Types::Types(T const& i)
-{
-	this->operator=(i);
-}
+
+using std::cout;
+using std::cin;
+
 
 int main() 
 {
-	Types type = Types(122);
-	Types type1 = (char *)"  saf";
-	Types::Swap(&type, &type1);
-	std::cout << type.ToChar() << std::endl;
-	std::cout << type1.ToInt() << std::endl;
+	Types tintVal = new Types(131);
+	Types tCharVal = new Types('a');
+	Types tDoubleVal = new Types((double) 1.125);
+	Types tBoolVal = new Types(true);
+	Types tFloatVal = new Types((float) 1.25);
+	Types tUintVal = new Types((unsigned int)123);
+	
+	int intVal = tintVal.ToInt();
+	char CharVal = tCharVal.ToChar();
+	double DoubleVal = tDoubleVal.ToDouble();
+	bool BoolVal = tBoolVal.ToBool();
+	float FloatVal = tFloatVal.ToFloat();
+	unsigned int UintVal = tUintVal.ToUInt();
 
-	return 0;
-	std::cout << type.ToInt() << std::endl;
-
-	type = true;
-	std::cout << type.ToBool() << std::endl;
-
-	type = 1.962;
-	std::cout << type.ToDouble() << std::endl;
 
 	return 0;
 }
