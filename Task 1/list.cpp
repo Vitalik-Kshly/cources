@@ -19,15 +19,12 @@ int StringListSize(char **listHead)
 
 void StringListRemove(char ***listHead, string str)
 {
-    if (!listHead[0])
+    if (!*listHead)
     {
         printf("List is empty! Stop it!");
         return;
     }
-
     char **temp = *listHead;
-    
-    
     while (temp != NULL)
     {
         
@@ -39,7 +36,6 @@ void StringListRemove(char ***listHead, string str)
             temp = *listHead;
             continue;
         }
-        
         if(temp[1] == NULL)
         {
             break;
@@ -60,7 +56,7 @@ void StringListRemove(char ***listHead, string str)
 
 void StringListAdd(char** listHead, string str)
 {
-    if (listHead[0] == NULL || listHead == NULL)
+    if (!*listHead)
     {
         *listHead = str;
         return;
@@ -87,7 +83,7 @@ void StringListInit(char*** listHead)
 
 void StringListIndexOf(char **listHead, string str)
 {
-    if (!listHead[0])
+    if (!*listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -138,7 +134,7 @@ void DisplayList(char **listHead)
 
 void StringListReplaceInStrings(char** listHead, string before, string after)
 {
-    if (!listHead[0])
+    if (!*listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -156,7 +152,7 @@ void StringListReplaceInStrings(char** listHead, string before, string after)
 
 void StringListSort(char **listHead)
 {
-    if (!listHead[0])
+    if (!*listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -215,4 +211,37 @@ void StringListDestroy(char*** listHead)
         tempFree = (char **)*listHead;
     }
     
+}
+
+void StringListRemoveDuplicates(char** listHead)
+{
+    if (!*listHead)
+    {
+        printf("List is empty! Stop it!");
+        return;
+    }
+    char **tempCheck;
+    char ** temp = listHead;
+    while(temp != NULL && temp[1] != NULL)
+    {
+        tempCheck = temp; 
+
+        while (tempCheck[1] != NULL)
+        {
+
+            if (!strcmp(*temp, *(char **)tempCheck[1]))
+            {
+                char **tempFree = (char **)tempCheck[1];
+                tempCheck[1] = ((char **) tempCheck[1])[1];
+                free(*tempFree);
+                free(tempFree);
+            }else
+            {
+                tempCheck = (char **) tempCheck[1];
+            }
+
+        } 
+        temp = (char **) temp[1];
+    }
+
 }

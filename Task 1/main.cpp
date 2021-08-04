@@ -14,7 +14,8 @@ void menu(char **listHead)
         printf("Enter 5 to remove the strings.\n");
         printf("Enter 6 to sort list.\n");
         printf("Enter 7 to replace string.\n");
-        printf("Enter 8 to DESTROY list.\n");
+        printf("Enter 8 to remove duplicates.\n");
+        printf("Enter 9 to DESTROY list.\n");
         printf("Enter -1 to exit.\n");
         std::cin >> choice;
 
@@ -85,6 +86,11 @@ void menu(char **listHead)
             break;
         }
         case 8:
+        {
+            StringListRemoveDuplicates(listHead);
+            break;
+        }
+        case 9:
         {
             StringListDestroy(&listHead);
         }
