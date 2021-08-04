@@ -1,4 +1,11 @@
 *.exe
-.vscode
-Tests
-.gitignore
+*.vscode
+*Tests
+*.gitignore
+*.sln
+*.vcxproj.filters
+*.vcxproj.user
+*.vcxproj
+*.json
+*.vs
+Debug/
