@@ -14,34 +14,38 @@ void menu(char **listHead)
         printf("Enter 5 to remove the strings.\n");
         printf("Enter 6 to sort list.\n");
         printf("Enter 7 to replace string.\n");
+        printf("Enter 8 to DESTROY list.\n");
         printf("Enter -1 to exit.\n");
         std::cin >> choice;
 
         switch (choice)
         {
         case 1:
+        {
+            printf("Enter a string.\n");
+            string tempStr = (string)malloc(STR_LENGTH);
+            std::cin >> tempStr;
+            if (!listHead)
             {
-                printf("Enter a string.\n");
-                char *tempStr = (char *)malloc(255);
-                std::cin >> tempStr;
-                if (!listHead){
-                    free(listHead);
-                    StringListInit(&listHead);
-                }
-                StringListAdd(listHead, tempStr);
-                break;
+                free(listHead);
+                StringListInit(&listHead);
             }
-        case 2:
-            display_list(listHead);
+            StringListAdd(listHead, tempStr);
             break;
+        }
+        case 2:
+        {
+            DisplayList(listHead);
+            break;
+        }
         case 3:
-            {
-                printf("Enter your string:\n");
-                char *tempStr = (char *)malloc(255);
-                std::cin >> tempStr;
-                StringListIndexOf(listHead, tempStr);
-                break;
-            }
+        {
+            printf("Enter your string:\n");
+            string tempStr = (string)malloc(STR_LENGTH);
+            std::cin >> tempStr;
+            StringListIndexOf(listHead, tempStr);
+            break;
+        }
         case 4:
         {
             std::cout << "List length is " << StringListSize(listHead) << std::endl;
@@ -49,27 +53,27 @@ void menu(char **listHead)
         }
         case 5:
         {
-            display_list(listHead);
+            DisplayList(listHead);
             string str = (string) malloc(STR_LENGTH);
             std::cout << "Enter string: ";
             std::cin >> str;
             StringListRemove(&listHead, str);
-            display_list(listHead);
+            DisplayList(listHead);
             break;
         }
         case 6:
         {
-            display_list(listHead);
+            DisplayList(listHead);
             StringListSort(listHead);
-            display_list(listHead);
+            DisplayList(listHead);
             break;
         }
             
         case 7:
         {
-            display_list(listHead);
-            string newStr = (char *)malloc(STR_LENGTH);
-            string oldStr = (char *)malloc(STR_LENGTH);
+            DisplayList(listHead);
+            string newStr = (string)malloc(STR_LENGTH);
+            string oldStr = (string)malloc(STR_LENGTH);
             std::cout << "Enter old string: ";
             std::cin >> oldStr;
             std::cout << "Enter new string: ";
@@ -77,8 +81,12 @@ void menu(char **listHead)
             StringListReplaceInStrings(listHead, oldStr, newStr);
             free(newStr);
             free(oldStr);
-            display_list(listHead);
+            DisplayList(listHead);
             break;
+        }
+        case 8:
+        {
+            StringListDestroy(&listHead);
         }
         default:
             continue;

@@ -1,25 +1,16 @@
 #include "list.h"
 
-
-static char ***get_element_by_index(char ***listHead, int index)
-{
-
-    char ***temp = listHead;
-    for (int i = 0; i < index - 1; i++)
-    {
-        temp = (char ***)temp[1];
-    }
-    return temp;
-}
-
-
 int StringListSize(char **listHead)
 {
-    if (!listHead)
-        return 0;
+    if (!listHead[0])
+    {
+        printf("List is empty! Stop it!");
+        return -1;
+    }
     char **temp = listHead;
     int index = 1;
-    while (temp[1] != nullptr) {
+    while (temp[1] != nullptr) 
+    {
         temp = (char **)temp[1];
         index++;
     }
@@ -28,7 +19,8 @@ int StringListSize(char **listHead)
 
 void StringListRemove(char ***listHead, string str)
 {
-    if (!listHead[0]){
+    if (!listHead[0])
+    {
         printf("List is empty! Stop it!");
         return;
     }
@@ -49,28 +41,33 @@ void StringListRemove(char ***listHead, string str)
         }
         
         if(temp[1] == NULL)
+        {
             break;
+        }
         char **cur = (char **)temp[1];
         char **next = (char **)cur[1];
-        if (strcmp(*cur, str) == 0){
+        if (strcmp(*cur, str) == 0)
+        {
             temp[1] = (char *)next;
             free(cur);
             cur = NULL;
         }
-        else
+        else{
             temp = (char **)temp[1];
-
+        }
     }
 }
 
 void StringListAdd(char** listHead, string str)
 {
-    if (listHead[0] == NULL || listHead == NULL){
+    if (listHead[0] == NULL || listHead == NULL)
+    {
         *listHead = str;
         return;
     }
     char **temp = listHead;
-    while (temp[1] != nullptr) {
+    while (temp[1] != nullptr) 
+    {
         temp = (char **)temp[1];
     }
     char **node = NULL;
@@ -78,29 +75,6 @@ void StringListAdd(char** listHead, string str)
     node[0] = str;
     temp[1] = (char *)node;
 }
-
-static void build_node(char *** node)
-{
-    *node = (char**) malloc(2*sizeof(char*));
-    (*node)[0] = (char*)malloc(sizeof(char*));
-    (*node)[1] = (char*)malloc(sizeof(char*));
-    (*node)[0] = NULL;
-    (*node)[1] = NULL;
-}
-
-// void add_elements(char ***listHead)
-// {
-//     printf("Enter count of elements:\n");
-//     int n;
-//     std::cin >> n;
-//     for (int i = 0; i < n; i++)
-//     {
-//         char *str = (char *)malloc(STR_LENGTH);
-//         std::cin >> str;
-//         char ***tempNode = build_node(str);
-//         push_item(listHead, tempNode);
-//     }
-// }
 
 void StringListInit(char*** listHead)
 {
@@ -113,12 +87,18 @@ void StringListInit(char*** listHead)
 
 void StringListIndexOf(char **listHead, string str)
 {
+    if (!listHead[0])
+    {
+        printf("List is empty! Stop it!");
+        return;
+    }
     bool match = 0;
     int tempi = 0;
     char **temp = listHead;
     std::cout << str << "\n";
     
-    while (temp[1] != nullptr) {
+    while (temp[1] != nullptr) 
+    {
         if (!strcmp(*temp, str))
         {
             match = 1;
@@ -136,7 +116,7 @@ void StringListIndexOf(char **listHead, string str)
     std::cout << "The index of first match for " << str << " is " << tempi << '\n'; 
 }
 
-void display_list(char **listHead)
+void DisplayList(char **listHead)
 {
     if (listHead == NULL || listHead[0] == NULL)
     {
@@ -158,18 +138,29 @@ void display_list(char **listHead)
 
 void StringListReplaceInStrings(char** listHead, string before, string after)
 {
-    
+    if (!listHead[0])
+    {
+        printf("List is empty! Stop it!");
+        return;
+    }
     char **temp = listHead;
     while (temp != NULL)
     {
         if (strcmp(*temp, before) == 0)
+        {
             strncpy(*temp, after, sizeof(after));
+        }
         temp = (char **)temp[1];
     }
 }
 
 void StringListSort(char **listHead)
 {
+    if (!listHead[0])
+    {
+        printf("List is empty! Stop it!");
+        return;
+    }
     //Sorts the list 
     char **curNode = (char **)malloc(1);
     curNode[0] = (char *)malloc(1);
@@ -182,7 +173,9 @@ void StringListSort(char **listHead)
         while (tempNode[1] != (char *)curNode)
         {
             if (!tempNode[1])
+            {
                 break;
+            }
             
             if (strcmp(*tempNode, *(char **) tempNode[1]) > 0)
                 {
@@ -205,3 +198,21 @@ void StringListSort(char **listHead)
 
 }
 
+void StringListDestroy(char*** listHead)
+{
+     if (!**listHead)
+    {
+        printf("List is empty! Stop it!");
+        return;
+    }
+    char **tempFree = *listHead;
+    while (*listHead != NULL)
+    {
+        
+        *listHead = (char **) (*listHead)[1];
+        free(*tempFree);
+        free(tempFree);
+        tempFree = (char **)*listHead;
+    }
+    
+}

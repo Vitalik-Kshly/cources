@@ -12,19 +12,18 @@ int StringListSize(char **listHead);
 void StringListRemove(char ***listHead, string str);
 
 void StringListAdd(char** listHead, string str);
-static void build_node(char ***node);
 
-// void add_elements(char ***listHead);
 void StringListInit(char *** listHead);
 
 void StringListIndexOf(char **listHead, string str);
 
-void display_list(char **listHead);
+void DisplayList(char **listHead);
 
 void StringListReplaceInStrings(char** list, char* before, char* after);
 
 void StringListSort(char **listHead);
-static char **get_element_by_index(char **listHead);
+
+void StringListDestroy(char*** list);
 
 
 #endif
