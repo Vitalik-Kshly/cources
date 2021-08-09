@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 
 union types
 {
@@ -8,6 +10,7 @@ union types
 	bool typeBool;
 	float typeFloat;
 	unsigned int typeUInt;
+	void* NoType;
 };
 
 enum TypesEnum
@@ -40,14 +43,15 @@ public:
 	double ToDouble();
 	float ToFloat();
 	bool ToBool();
+	void DestroyObj();
+	std::string CurType();
 	int ChosenType;
 	types Type;
-
 	static void Swap(Types* a, Types* b);
 private:
 	
 	TypesEnum _types;
-	bool _isCorrectType(int type);
+	void _isCorrectType(int type);
 	
 };
 
@@ -56,5 +60,4 @@ Types::Types(T const& i)
 {
 	this->operator=(i);
 }
-
 

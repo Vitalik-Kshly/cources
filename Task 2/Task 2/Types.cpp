@@ -1,4 +1,14 @@
 #include "Types.h"
+std::string TypeNames[7]
+{
+	"NoType",
+	"Int",
+	"Char",
+	"Double",
+	"Bool",
+	"Float",
+	"UnsignedInt"
+};
 
 class TypeError : public std::exception 
 {
@@ -22,7 +32,7 @@ void Types::operator=(char i)
 
 void Types::operator=(double i)
 {
-	this->Type.typeFloat = i;
+	this->Type.typeDouble = i;
 	this->ChosenType = typeDouble;
 }
 void Types::operator=(bool i)
@@ -77,12 +87,19 @@ unsigned int Types::ToUInt()
 	return this->Type.typeUInt;
 }
 
-bool Types::_isCorrectType(int type)
+void Types::DestroyObj() 
+{
+	this->Type.NoType = NULL;
+	this->ChosenType = NoType;
+}
+
+void Types::_isCorrectType(int type)
 {
 	if (type != this->ChosenType)
 	{
 		throw TypeError();
 	}
+	//return true;
 }
 
 void Types::Swap(Types* a, Types* b)
@@ -91,6 +108,14 @@ void Types::Swap(Types* a, Types* b)
 	std::swap(a->Type, b->Type);
 }
 
+std::string Types::CurType()
+{
+	if (this->ChosenType == NoType) 
+	{
+		return "There is no value!";
+	}
+	return TypeNames[this->ChosenType];
+}
 
 Types::~Types()
 {
