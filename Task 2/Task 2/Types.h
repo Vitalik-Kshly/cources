@@ -26,6 +26,7 @@ enum TypesEnum
 
 
 
+
 class Types
 {
 public:
@@ -37,6 +38,7 @@ public:
 	void operator=(bool i);
 	void operator=(float i);
 	void operator=(unsigned int i);
+
 	int ToInt();
 	unsigned int ToUInt();
 	char ToChar();
@@ -44,6 +46,7 @@ public:
 	float ToFloat();
 	bool ToBool();
 	void DestroyObj();
+
 	std::string CurType();
 	int ChosenType;
 	types Type;

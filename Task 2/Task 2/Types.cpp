@@ -1,7 +1,7 @@
 #include "Types.h"
-std::string TypeNames[7]
+static std::string TypeNames[7]
 {
-	"NoType",
+	"There is no value!",
 	"Int",
 	"Char",
 	"Double",
@@ -99,7 +99,6 @@ void Types::_isCorrectType(int type)
 	{
 		throw TypeError();
 	}
-	//return true;
 }
 
 void Types::Swap(Types* a, Types* b)
@@ -110,10 +109,6 @@ void Types::Swap(Types* a, Types* b)
 
 std::string Types::CurType()
 {
-	if (this->ChosenType == NoType) 
-	{
-		return "There is no value!";
-	}
 	return TypeNames[this->ChosenType];
 }
 
