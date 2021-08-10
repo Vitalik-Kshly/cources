@@ -1,11 +1,16 @@
 #include <iostream>
+#include <string>
+
 
 union types
 {
 	int typeInteger;
-	char* typeChar;
-	double typeFloat;
+	char typeChar;
+	double typeDouble;
 	bool typeBool;
+	float typeFloat;
+	unsigned int typeUInt;
+	void* NoType;
 };
 
 enum TypesEnum
@@ -14,7 +19,9 @@ enum TypesEnum
 	typeInteger,
 	typeChar,
 	typeDouble,
-	typeBool
+	typeBool,
+	typeFloat,
+	typeUInt
 };
 
 
@@ -25,23 +32,32 @@ public:
 	template <typename T>Types(T const& i);
 	~Types();
 	void operator=(int i);
-	void operator=(char *i);
+	void operator=(char i);
 	void operator=(double i);
 	void operator=(bool i);
+	void operator=(float i);
+	void operator=(unsigned int i);
 	int ToInt();
-	char* ToChar();
-	float ToDouble();
+	unsigned int ToUInt();
+	char ToChar();
+	double ToDouble();
+	float ToFloat();
 	bool ToBool();
+	void DestroyObj();
+	std::string CurType();
 	int ChosenType;
 	types Type;
-
 	static void Swap(Types* a, Types* b);
 private:
 	
 	TypesEnum _types;
-	bool _isCorrectType(int type);
+	void _isCorrectType(int type);
 	
 };
 
-
+template <typename T>
+Types::Types(T const& i)
+{
+	this->operator=(i);
+}
 
