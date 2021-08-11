@@ -12,8 +12,14 @@ static std::string TypeNames[7]
 
 class TypeError : public std::exception 
 {
-	const char* what() const throw () {
+	const char* what() const throw () 
+	{
 		return "Error!";
+	}
+public:
+	TypeError(std::string ErrorMsgTypes) 
+	{
+		cout << "TYPE ERROR! Cannot convert " + ErrorMsgTypes << std::endl;
 	}
 };
 
@@ -97,7 +103,7 @@ void Types::_isCorrectType(int type)
 {
 	if (type != this->ChosenType)
 	{
-		throw TypeError();
+		throw TypeError(TypeNames[this->ChosenType] + " to " + TypeNames[type]);
 	}
 }
 

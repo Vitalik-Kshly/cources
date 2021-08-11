@@ -1,7 +1,6 @@
 #include "Types.h"
 
-using std::cout;
-using std::cin;
+
 
 
 
@@ -16,12 +15,12 @@ int main()
 	
 	tintVal.DestroyObj();
 	//cout << tintVal.ToInt();
-	cout << tCharVal.CurType();
+	//cout << tCharVal.CurType();
 
-	int intVal = tintVal.ToInt();
+	//int intVal = tintVal.ToInt();
 	char CharVal = tCharVal.ToChar();
 	double DoubleVal = tDoubleVal.ToDouble();
-	bool BoolVal = tBoolVal.ToBool();
+	bool BoolVal = tBoolVal.ToUInt();
 	float FloatVal = tFloatVal.ToFloat();
 	unsigned int UintVal = tUintVal.ToUInt();
 
