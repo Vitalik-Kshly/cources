@@ -74,7 +74,16 @@ void StringListAdd(char** listHead, string str)
 
 void StringListInit(char*** listHead)
 {
+    if(!listHead)
+    {
+        printf("Error Empty HEAD!");
+        return;
+    }
     *listHead = (char **)malloc(sizeof (char *) * 2);
+    if (!*listHead) {
+        printf("Memory did not allocate!");
+        return;
+    }
     (*listHead)[0] = (char*)malloc(sizeof(char*));
     (*listHead)[1] = (char*)malloc(sizeof(char*));
     (*listHead)[0] = NULL;
@@ -83,7 +92,7 @@ void StringListInit(char*** listHead)
 
 void StringListIndexOf(char **listHead, string str)
 {
-    if (!*listHead)
+    if (!*listHead || !listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -114,7 +123,7 @@ void StringListIndexOf(char **listHead, string str)
 
 void DisplayList(char **listHead)
 {
-    if (listHead == NULL || listHead[0] == NULL)
+    if (!listHead || !*listHead)
     {
         printf("List is empty!\n");
         return;
@@ -134,7 +143,7 @@ void DisplayList(char **listHead)
 
 void StringListReplaceInStrings(char** listHead, string before, string after)
 {
-    if (!*listHead)
+    if (!*listHead || !listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -150,17 +159,28 @@ void StringListReplaceInStrings(char** listHead, string before, string after)
     }
 }
 
+static void swap(char ***a, char**&b)
+{
+    char** c = *a;
+    *a = b;
+    b = c;
+}
+
 void StringListSort(char **listHead)
 {
-    if (!*listHead)
+    if (!*listHead || !listHead)
     {
         printf("List is empty! Stop it!");
         return;
     }
     //Sorts the list 
     char **curNode = (char **)malloc(1);
-    curNode[0] = (char *)malloc(1);
-    curNode[0] = NULL;
+    if (!curNode) {
+        printf("Memory did not allocate!");
+        return;
+    }
+    *curNode = (char *)malloc(1);
+    *curNode = NULL;
     bool swapped;
     do
     {
@@ -176,18 +196,15 @@ void StringListSort(char **listHead)
             if (strcmp(*tempNode, *(char **) tempNode[1]) > 0)
                 {
                     std::cout << "Shit: " << tempNode[0] << ' ' << *(char **) tempNode[1] << std::endl;
-                    char *tempStr = (char *) malloc(sizeof(tempNode[0]));
-                    
                     //Swap values
-                    strncpy(tempStr, tempNode[0], sizeof(tempNode[0]));
-                    strncpy(tempNode[0], *(char **) tempNode[1], sizeof(*(char **) tempNode[1]));
-                    strncpy(*(char **) tempNode[1], tempStr, sizeof(tempStr));
-
-                    free(tempStr);
+                    char** nextNode = (char**)tempNode[1];
+                    char* tempStr = *nextNode;
+                    *nextNode = *tempNode;
+                    *tempNode = tempStr;
                     swapped = 1;
                 }
                 
-            tempNode = (char **)tempNode[1];
+            tempNode = (char **) tempNode[1];
         }
         curNode = (char**) tempNode[1];
     }while(swapped);
@@ -196,7 +213,7 @@ void StringListSort(char **listHead)
 
 void StringListDestroy(char*** listHead)
 {
-     if (!**listHead)
+    if (!*listHead || !listHead || !***listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -215,21 +232,21 @@ void StringListDestroy(char*** listHead)
 
 void StringListRemoveDuplicates(char** listHead)
 {
-    if (!*listHead)
+    if (!*listHead || !listHead)
     {
         printf("List is empty! Stop it!");
         return;
     }
-    char **tempCheck;
+    char **tempCheck = NULL;
     char ** temp = listHead;
+
     while(temp != NULL && temp[1] != NULL)
     {
         tempCheck = temp; 
-
         while (tempCheck[1] != NULL)
         {
 
-            if (!strcmp(*temp, *(char **)tempCheck[1]))
+            if (!strcmp(*temp, *(char**)tempCheck[1]))
             {
                 char **tempFree = (char **)tempCheck[1];
                 tempCheck[1] = ((char **) tempCheck[1])[1];

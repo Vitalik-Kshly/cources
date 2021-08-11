@@ -1,4 +1,4 @@
-
+#pragma warning(disable : 4996)
 #ifndef LIST_H 
 #define LIST_H
 #include <iostream>
