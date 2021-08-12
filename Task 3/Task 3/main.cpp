@@ -6,5 +6,6 @@ int main()
     // scanner.ScanFile();
     // scanner.ChangePath("files/file.cpp");
     scanner.ScanFile();
+    scanner.PrintData();
     return 0;
 }

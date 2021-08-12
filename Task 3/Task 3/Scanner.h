@@ -10,13 +10,14 @@ public:
     Scanner(string path);
     void ChangePath(string path);
     void ScanFile();
-    
     ~Scanner();
+    void PrintData();
 private:
     size_t _indexOfInlineComment(string line);
     size_t _indexOfComment(string line);
     size_t _indexOfCode(string line);
-    bool _lineContainsCode(string line, size_t IndexOfCode, size_t  IndexOfInlineComment, size_t IndexOfComment, size_t IndexOfCloseComment);
+    bool _lineContainsCode(string line, bool inCommentBlock = false);
+    void _printLine(string line = "");
     string _filePath;
     ofstream _out;
     fstream _fileStream;
