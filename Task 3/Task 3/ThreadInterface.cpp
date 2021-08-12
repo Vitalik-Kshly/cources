@@ -1,7 +1,8 @@
 #include "ThreadInterface.h"
 
-ThreadInterface::ThreadInterface() :
-	_threadsCount(7)
+ThreadInterface::ThreadInterface(string dir) :
+	_threadsCount(6),
+	_dir(dir)
 {
 	time(&_start);
 	_out.open("output.txt");
@@ -13,15 +14,17 @@ ThreadInterface::ThreadInterface() :
 		temp->Thread = make_shared<thread>(thread(&ThreadInterface::_fileScanner, this, temp));
 		_threads.push_back(temp);
 	}
-	//_initThreads();
-	//_mainThread.join();
 }
 
 
-//ThreadInterface::~ThreadInterface()
-//{
-//	_out.close();
-//}
+ThreadInterface::~ThreadInterface()
+{
+	time(&_end);
+	_out << "Programm execution time is:" << difftime(_end, _start) << "sec.\n";
+	_out.close();
+	_mainThread->detach();
+	exit(0);
+}
 
 void ThreadInterface::AddFile(string ReadFilePath)
 {
@@ -45,12 +48,12 @@ void* ThreadInterface::_threadProcessing()
 		{
 			for (auto& thread : _threads)
 			{
-				if (!(*thread).IsActive)
+				if (!thread->IsActive && !_processFiles.empty())
 				{
 					_threadLock.lock();
-					(*thread).FilePath = make_shared<string>(_processFiles.back());
+					thread->FilePath = make_shared<string>(_processFiles.back());
 					_processFiles.pop_back();
-					(*thread).IsActive = true;
+					thread->IsActive = true;
 					_threadLock.unlock();
 				}
 			}
@@ -67,10 +70,7 @@ void* ThreadInterface::_threadProcessing()
 			}
 			if (isEnd)
 			{
-				time(&_end);
-				_out << "Programm execution time is:" << difftime(_end, _start) << "sec.\n";
-				_out.close();
-				exit(0);
+				delete this;
 			}
 		}
 	}
@@ -80,14 +80,15 @@ void ThreadInterface::_initThreads()
 {
 	for (auto &Thread : _threads)
 	{
-		(*Thread).Thread->join();
+		Thread->Thread->join();
 	}
 }
 
 void ThreadInterface::_fileScanner(shared_ptr<ThreadFile> Thread)
 {
-	int _emptyLines, _codeLines, _commentLines, i = 0;
+	int _emptyLines, _codeLines, _commentLines;
 	time_t start, end;
+	double dTime;
 	while (true)
 	{
 		if (Thread->IsActive)
@@ -95,11 +96,11 @@ void ThreadInterface::_fileScanner(shared_ptr<ThreadFile> Thread)
 			time(&start);
 			Scanner scanner(*Thread->FilePath);
 			scanner.ScanFile();
-			time(&end);
 			scanner.GetData(_emptyLines, _codeLines, _commentLines);
-			double dT = difftime(end, start);
+			time(&end);
+			dTime = difftime(end, start);
 			_threadLock.lock();
-			_out << "FILE " << *Thread->FilePath << "\nTime is: " << dT << " sec:" << endl;
+			_out << "FILE " << *Thread->FilePath << "\nTime is: " << dTime << " sec:" << endl;
 			_out << "Empty lines" << ": " << _emptyLines << endl;
 			_out << "Code lines" << ": " << _codeLines << endl;
 			_out << "Comment lines" << ": " << _commentLines << "\n";

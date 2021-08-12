@@ -4,8 +4,10 @@
 #include <time.h>
 #include <mutex>
 #include <fstream>
-#include "Scanner.h"
 #include <memory>
+#include <filesystem>
+
+#include "Scanner.h"
 
 struct ThreadFile
 {
@@ -24,8 +26,8 @@ struct ThreadFile
 class ThreadInterface
 {
 public:
-	ThreadInterface();
-	//~ThreadInterface();
+	ThreadInterface(string dir);
+	~ThreadInterface();
 	void AddFile(string ReadFilePath);
 	void StartThread();
 	
@@ -43,4 +45,5 @@ private:
 	mutex _threadLock;
 	ofstream _out;
 	time_t _start, _end;
+	string _dir;
 };
