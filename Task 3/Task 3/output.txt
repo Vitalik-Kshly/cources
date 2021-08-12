@@ -1,0 +1,92 @@
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/2.cpp
+Time is: 0 sec:
+Empty lines: 22
+Code lines: 181
+Comment lines: 40
+Count: 243
+
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/1.cpp
+Time is: 0 sec:
+Empty lines: 2
+Code lines: 10
+Comment lines: 22
+Count: 34
+
+FILE files/3.cpp
+Time is: 0 sec:
+Empty lines: 19
+Code lines: 129
+Comment lines: 35
+Count: 183
+
+FILE files/7.cpp
+Time is: 0 sec:
+Empty lines: 1596
+Code lines: 2989
+Comment lines: 3192
+Count: 7777
+
+FILE files/6.cpp
+Time is: 0 sec:
+Empty lines: 1368
+Code lines: 2562
+Comment lines: 2736
+Count: 6666
+
+FILE files/4.cpp
+Time is: 0 sec:
+Empty lines: 3876
+Code lines: 7259
+Comment lines: 7752
+Count: 18887
+
+FILE files/5.cpp
+Time is: 3 sec:
+Empty lines: 49248
+Code lines: 92179
+Comment lines: 98496
+Count: 239923
+
+Programm execution time is:4sec.

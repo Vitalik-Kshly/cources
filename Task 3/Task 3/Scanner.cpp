@@ -33,7 +33,7 @@ void Scanner::ScanFile()
 		if (line.empty() || IndexOfCode == string::npos)
 		{
 			_emptyLines += 1;
-			_printLine(line);
+			//_printLine(line);
 
 		}
 		else if (IndexOfComment != string::npos && IndexOfInlineComment > IndexOfComment)
@@ -41,7 +41,7 @@ void Scanner::ScanFile()
 			_commentLines += 1;
 			inCommentBlock = true;
 			_codeLines += _lineContainsCode(line);
-			_printLine(line);
+			//_printLine(line);
 			while (inCommentBlock && getline(_fileStream, line))
 			{
 				IndexOfCode = line.find_first_not_of(' ');
@@ -57,19 +57,17 @@ void Scanner::ScanFile()
 					inCommentBlock = false;
 				}
 				_codeLines += _lineContainsCode(line, inCommentBlock);
-				_printLine(line);
+				//_printLine(line);
 			}
+			continue;
 		}
 		else if (IndexOfInlineComment != string::npos)
 		{
 			_commentLines += 1;
-			_printLine(line);
+			//_printLine(line);
 		}
-		else
-		{
 			_codeLines += _lineContainsCode(line);
-			_printLine(line);
-		}
+			//_printLine(line);
 	}
 }
 
@@ -111,7 +109,16 @@ bool Scanner::_lineContainsCode(string line, bool inCommentBlock)
 	return 0;
 }
 
-void Scanner::PrintData() 
+void Scanner::GetData(int& emptyLines, int& codeLines, int& commentLines)
 {
-	_printLine();
+	emptyLines = _emptyLines;
+	codeLines = _codeLines;
+	commentLines = _commentLines;
+}
+
+
+void Scanner::PrintData()
+{
+	cout << "Empty :" << _emptyLines << "Code :" << _codeLines << "Comments :" << _commentLines << endl;
+
 }
