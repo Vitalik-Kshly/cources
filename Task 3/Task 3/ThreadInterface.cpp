@@ -1,12 +1,15 @@
 #include "ThreadInterface.h"
 
 ThreadInterface::ThreadInterface(string dir) :
-	_threadsCount(6),
-	_dir(dir)
+	_threadsCount(5),
+	_dir(dir),
+	_iterFileStream(dir),
+	_fileExtensions{".cpp", ".h", ".c", ".hpp"}
 {
 	time(&_start);
 	_out.open("output.txt");
 	_mainThread = make_shared<thread>(thread(&ThreadInterface::_threadProcessing, this));
+	_scanThread = make_shared<thread>(thread(&ThreadInterface::_getFiles, this));
 	
 	for (int i = 0; i < _threadsCount; i++)
 	{
@@ -40,6 +43,7 @@ void ThreadInterface::StartThread()
 
 void* ThreadInterface::_threadProcessing()
 {
+	_scanThread->join();
 	bool isEnd;
 	cout << "Processing Thread!\n";
 	while (true)
@@ -76,11 +80,22 @@ void* ThreadInterface::_threadProcessing()
 	}
 }
 
-void ThreadInterface::_initThreads()
+void ThreadInterface::_getFiles()
 {
-	for (auto &Thread : _threads)
+	
+	while (!(_iterFileStream == end(_iterFileStream)))
 	{
-		Thread->Thread->join();
+		auto path = _iterFileStream->path();
+		string extension = path.extension().string();
+		string file = path.string();
+
+		if (find(_fileExtensions.begin(), _fileExtensions.end(), extension) != _fileExtensions.end())
+		{
+			_threadLock.lock();
+			_processFiles.push_back(file);
+			_threadLock.unlock();
+		}
+		_iterFileStream++;
 	}
 }
 

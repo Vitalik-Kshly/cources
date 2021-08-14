@@ -9,6 +9,7 @@
 
 #include "Scanner.h"
 
+namespace fs = std::filesystem;
 struct ThreadFile
 {
 	shared_ptr<thread> Thread;
@@ -35,13 +36,16 @@ public:
 
 private:
 	shared_ptr<thread> _mainThread;
+	shared_ptr<thread> _scanThread;
 	const int _threadsCount;
 	void* _threadProcessing();
 	void _fileScanner(shared_ptr<ThreadFile>);
-	void _initThreads();
+	void _getFiles();
+	fs::recursive_directory_iterator _iterFileStream;
 	vector<shared_ptr<ThreadFile>> _threads;
 	//vector<ThreadFile> _inactiveThreads;
 	vector<string> _processFiles;
+	vector<string> _fileExtensions;
 	mutex _threadLock;
 	ofstream _out;
 	time_t _start, _end;

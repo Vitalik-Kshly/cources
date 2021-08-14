@@ -4,7 +4,7 @@ Scanner::Scanner(string path)
 {
 	_codeLines = _commentLines = _emptyLines = 0;
 	ChangePath(path);
-	_out.open("output.cpp");
+
 }
 
 void Scanner::ChangePath(string path)
