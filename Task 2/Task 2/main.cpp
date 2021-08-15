@@ -20,11 +20,11 @@ int main()
 	//int intVal = tintVal.ToInt();
 	char CharVal = tCharVal.ToChar();
 	double DoubleVal = tDoubleVal.ToDouble();
-	bool BoolVal = tBoolVal.ToUInt();
+	bool BoolVal = tBoolVal.ToBool();
 	float FloatVal = tFloatVal.ToFloat();
 	unsigned int UintVal = tUintVal.ToUInt();
-
-	
+	Types newVal = tFloatVal;
+	Types newVal1 = std::move(tFloatVal);
 
 	return 0;
 }

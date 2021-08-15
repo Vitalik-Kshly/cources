@@ -55,6 +55,7 @@ void* ThreadInterface::_threadProcessing()
 				if (!thread->IsActive && !_processFiles.empty())
 				{
 					_threadLock.lock();
+					thread->FilePath.reset();
 					thread->FilePath = make_shared<string>(_processFiles.back());
 					_processFiles.pop_back();
 					thread->IsActive = true;
@@ -109,6 +110,7 @@ void ThreadInterface::_fileScanner(shared_ptr<ThreadFile> Thread)
 		if (Thread->IsActive)
 		{
 			time(&start);
+			cout << "Scanning: " << *Thread->FilePath << endl;
 			Scanner scanner(*Thread->FilePath);
 			scanner.ScanFile();
 			scanner.GetData(_emptyLines, _codeLines, _commentLines);

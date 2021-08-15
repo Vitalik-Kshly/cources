@@ -31,7 +31,7 @@ enum TypesEnum
 class Types
 {
 public:
-	template <typename T>Types(T const& i);
+	template <typename T>Types(T const i);
 	~Types();
 	void operator=(int i);
 	void operator=(char i);
@@ -39,7 +39,8 @@ public:
 	void operator=(bool i);
 	void operator=(float i);
 	void operator=(unsigned int i);
-
+	Types(Types& t);
+	Types(Types&& t);
 	int ToInt();
 	unsigned int ToUInt();
 	char ToChar();
@@ -54,13 +55,12 @@ public:
 	static void Swap(Types* a, Types* b);
 private:
 	
-	TypesEnum _types;
 	void _isCorrectType(int type);
 	
 };
 
 template <typename T>
-Types::Types(T const& i)
+Types::Types(T const i)
 {
 	this->operator=(i);
 }

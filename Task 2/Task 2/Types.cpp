@@ -59,6 +59,21 @@ void Types::operator=(unsigned int i)
 	this->ChosenType = typeUInt;
 }
 
+Types::Types(Types& t) :
+	Type(t.Type),
+	ChosenType(t.ChosenType)
+{
+}
+
+Types::Types(Types&& t):
+	Type(t.Type),
+	ChosenType(t.ChosenType)
+{
+	std::move(t.Type);
+	std::move(t.ChosenType);
+}
+
+
 int Types::ToInt() 
 {
 	this->_isCorrectType(typeInteger);

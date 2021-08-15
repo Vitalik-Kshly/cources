@@ -1,78 +1,50 @@
-FILE files/5 - Copy - Copy (3).cpp
-Time is: 3 sec:
+FILE files/sub213 - Copy - Copy (3)\sub.cpp
+Time is: 4 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-FILE files/5 - Copy - Copy.c
-Time is: 3 sec:
+FILE files/sub213 - Copy - Copy (4)\sub.cpp
+Time is: 4 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-FILE files/5 - Copy.cpp
-Time is: 3 sec:
+FILE files/sub213 - Copy - Copy (7)\sub.cpp
+Time is: 4 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-FILE files/5.cpp
-Time is: 3 sec:
+FILE files/sub213 - Copy - Copy (6)\sub.cpp
+Time is: 4 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-FILE files/5 - Copy - Copy (4).h
-Time is: 3 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/5 - Copy (6).cpp
-Time is: 3 sec:
+FILE files/sub213 - Copy - Copy (5)\sub.cpp
+Time is: 4 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
 FILE files/5 - Copy - Copy (2).cpp
-Time is: 3 sec:
+Time is: 2 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-FILE files/5 - Copy (5).cpp
-Time is: 3 sec:
+FILE files/5 - Copy - Copy (3).cpp
+Time is: 2 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-FILE files/5 - Copy (4).cpp
-Time is: 3 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/5 - Copy (3).cpp
-Time is: 3 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/5 - Copy (2).hpp
-Time is: 3 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-Programm execution time is:9sec.
+Programm execution time is:6sec.
