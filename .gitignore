@@ -10,3 +10,7 @@
 *.tlog
 *.log
 *.json
+*.vcxproj
+*.filters
+*.user
+*.sln
