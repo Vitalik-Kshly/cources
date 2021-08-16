@@ -67,14 +67,13 @@ void Scanner::ScanFile()
 
 Scanner::~Scanner()
 {
-	_out.close();
 	_fileStream.close();
 }
 
 void Scanner::_printLine(string line)
 {
-	_out << "Empty :" << _emptyLines << "Code :" << _codeLines << "Comments :" << _commentLines << endl;
-	_out << line << endl;
+	cout << "Empty :" << _emptyLines << "Code :" << _codeLines << "Comments :" << _commentLines << endl;
+	cout << line << endl;
 }
 
 bool Scanner::_lineContainsCode(string line, bool inCommentBlock)

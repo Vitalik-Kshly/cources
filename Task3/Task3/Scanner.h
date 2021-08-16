@@ -18,7 +18,6 @@ private:
     bool _lineContainsCode(string line, bool inCommentBlock = false);
     void _printLine(string line = "");
     string _filePath;
-    ofstream _out;
     fstream _fileStream;
     int _emptyLines, _codeLines, _commentLines;
 

@@ -16,5 +16,5 @@
 *.sln
 Files
 *.enc
-x64
+Task3/x64
 Debug
