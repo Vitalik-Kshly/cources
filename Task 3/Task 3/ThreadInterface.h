@@ -46,6 +46,6 @@ private:
 	vector<string> _fileExtensions;
 	mutex _threadLock;
 	ofstream _out;
-	time_t _start, _end;
+	clock_t _startClock, _endClock;
 	string _dir;
 };

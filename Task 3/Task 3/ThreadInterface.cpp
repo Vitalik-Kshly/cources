@@ -7,7 +7,7 @@ ThreadInterface::ThreadInterface(string dir) :
     _isEnd(false),
     _fileExtensions{".cpp", ".h", ".c", ".hpp"}
 {
-    time(&_start);
+    _startClock = clock();
     _out.open("output.txt");
     _mainThread = make_shared<thread>(thread(&ThreadInterface::_threadProcessing, this));
     _scanThread = make_shared<thread>(thread(&ThreadInterface::_getFiles, this));
@@ -22,8 +22,8 @@ ThreadInterface::ThreadInterface(string dir) :
 
 ThreadInterface::~ThreadInterface()
 {
-    time(&_end);
-    _out << "Programm execution time is:" << difftime(_end, _start) << "sec.\n";
+    _endClock = clock();
+    _out << "Programm execution clock time is:" << difftime(_endClock, _startClock) / CLK_TCK << "sec.\n";
     _out.close();
 
     for (auto& thread : _threads)
@@ -109,19 +109,19 @@ void ThreadInterface::_getFiles()
 void ThreadInterface::_fileScanner(shared_ptr<ThreadFile> Thread)
 {
     int _emptyLines, _codeLines, _commentLines;
-    time_t start, end;
+    clock_t startClock, endClock;
     double dTime;
     while (!_isEnd)
     {
         if (Thread->IsActive)
         {
-            time(&start);
+            startClock = clock();
             cout << "Scanning: " << *Thread->FilePath << endl;
             Scanner scanner(*Thread->FilePath);
             scanner.ScanFile();
             scanner.GetData(_emptyLines, _codeLines, _commentLines);
-            time(&end);
-            dTime = difftime(end, start);
+            endClock = clock();
+            dTime = difftime(endClock, startClock) / CLK_TCK;
             _threadLock.lock();
             _out << "FILE " << *Thread->FilePath << "\nTime is: " << dTime << " sec:" << endl;
             _out << "Empty lines" << ": " << _emptyLines << endl;
@@ -130,7 +130,6 @@ void ThreadInterface::_fileScanner(shared_ptr<ThreadFile> Thread)
             _out << "Count: " << _commentLines + _codeLines + _emptyLines << "\n\n";
             Thread->IsActive = false;
             _threadLock.unlock();
-            
         }
     }
 }
