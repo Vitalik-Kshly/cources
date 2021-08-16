@@ -1,50 +1,8 @@
-FILE files/sub213 - Copy - Copy (3)\sub.cpp
-Time is: 4 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/sub213 - Copy - Copy (4)\sub.cpp
-Time is: 4 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/sub213 - Copy - Copy (7)\sub.cpp
-Time is: 4 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/sub213 - Copy - Copy (6)\sub.cpp
-Time is: 4 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/sub213 - Copy - Copy (5)\sub.cpp
-Time is: 4 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
-FILE files/5 - Copy - Copy (2).cpp
-Time is: 2 sec:
-Empty lines: 49248
-Code lines: 92179
-Comment lines: 98496
-Count: 239923
-
 FILE files/5 - Copy - Copy (3).cpp
-Time is: 2 sec:
+Time is: 3 sec:
 Empty lines: 49248
 Code lines: 92179
 Comment lines: 98496
 Count: 239923
 
-Programm execution time is:6sec.
+Programm execution time is:3sec.
