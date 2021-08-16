@@ -1,9 +1,5 @@
 #include "Types.h"
 
-
-
-
-
 int main() 
 {
 	Types tintVal = Types(131);
@@ -21,7 +17,6 @@ int main()
 	{
 		cout << e.what();
 	}
-
 
 	tintVal.DestroyObj();
 

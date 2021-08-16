@@ -33,6 +33,7 @@ public:
 	void StartThread();
 
 private:
+	bool _isEnd;
 	shared_ptr<thread> _mainThread;
 	shared_ptr<thread> _scanThread;
 	const int _threadsCount;

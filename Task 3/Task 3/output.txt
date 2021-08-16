@@ -1,4 +1,18 @@
-FILE files/5 - Copy - Copy (3).cpp
+FILE files/5 - Copy - Copy (3) - Copy.cpp
+Time is: 3 sec:
+Empty lines: 49248
+Code lines: 92179
+Comment lines: 98496
+Count: 239923
+
+FILE files/5 - Copy - Copy (15) - Copy.cpp
+Time is: 3 sec:
+Empty lines: 49248
+Code lines: 92179
+Comment lines: 98496
+Count: 239923
+
+FILE files/5 - Copy - Copy (16) - Copy.cpp
 Time is: 3 sec:
 Empty lines: 49248
 Code lines: 92179

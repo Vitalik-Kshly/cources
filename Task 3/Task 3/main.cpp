@@ -4,9 +4,9 @@
 int main()
 {
 
-    ThreadInterface* thread = new ThreadInterface("files/");
+    ThreadInterface thread = ThreadInterface("files/");
     
-    thread->StartThread();
- 
+    thread.StartThread();
+
     return 0;
 }

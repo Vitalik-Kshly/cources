@@ -4,6 +4,7 @@ ThreadInterface::ThreadInterface(string dir) :
     _threadsCount(5),
     _dir(dir),
     _iterFileStream(dir),
+    _isEnd(false),
     _fileExtensions{".cpp", ".h", ".c", ".hpp"}
 {
     time(&_start);
@@ -19,14 +20,16 @@ ThreadInterface::ThreadInterface(string dir) :
     }
 }
 
-
 ThreadInterface::~ThreadInterface()
 {
     time(&_end);
     _out << "Programm execution time is:" << difftime(_end, _start) << "sec.\n";
     _out.close();
-    _mainThread->detach();
-    exit(0);
+
+    for (auto& thread : _threads)
+    {
+        thread->Thread->detach();
+    }
 }
 
 void ThreadInterface::AddFile(string ReadFilePath)
@@ -47,7 +50,7 @@ void ThreadInterface::_threadProcessing()
     bool isEnd = false;
     cout << "Processing Thread!\n";
     
-    while (!isEnd)
+    while (!_isEnd)
     {
         if (!_processFiles.empty())
         {
@@ -76,8 +79,9 @@ void ThreadInterface::_threadProcessing()
             }
             if (isEnd)
             {
-                delete this;
-                return;
+                _threadLock.lock();
+                _isEnd = true;
+                _threadLock.unlock();
             }
         }
     }
@@ -107,7 +111,7 @@ void ThreadInterface::_fileScanner(shared_ptr<ThreadFile> Thread)
     int _emptyLines, _codeLines, _commentLines;
     time_t start, end;
     double dTime;
-    while (true)
+    while (!_isEnd)
     {
         if (Thread->IsActive)
         {
