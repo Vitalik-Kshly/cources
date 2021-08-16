@@ -6,6 +6,7 @@ void menu(char **listHead)
     
     while (choice != -1)
     {
+        choice = 0;
         printf("Make your choice:\n");
         printf("Enter 1 to push a string.\n");
         printf("Enter 2 to display a list.\n");
@@ -95,7 +96,7 @@ void menu(char **listHead)
             StringListDestroy(&listHead);
         }
         default:
-            continue;
+            break;
         }
     }
 }

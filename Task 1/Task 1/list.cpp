@@ -2,7 +2,7 @@
 
 int StringListSize(char **listHead)
 {
-    if (!listHead[0])
+    if (!listHead || !*listHead)
     {
         printf("List is empty! Stop it!");
         return -1;
@@ -19,7 +19,7 @@ int StringListSize(char **listHead)
 
 void StringListRemove(char ***listHead, string str)
 {
-    if (!*listHead)
+    if (!listHead || !*listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -56,7 +56,7 @@ void StringListRemove(char ***listHead, string str)
 
 void StringListAdd(char** listHead, string str)
 {
-    if (!*listHead)
+    if (!listHead || !*listHead)
     {
         *listHead = str;
         return;
@@ -80,7 +80,8 @@ void StringListInit(char*** listHead)
         return;
     }
     *listHead = (char **)malloc(sizeof (char *) * 2);
-    if (!*listHead) {
+    if (!*listHead) 
+    {
         printf("Memory did not allocate!");
         return;
     }
@@ -92,7 +93,7 @@ void StringListInit(char*** listHead)
 
 void StringListIndexOf(char **listHead, string str)
 {
-    if (!*listHead || !listHead)
+    if (!listHead || !*listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -143,7 +144,7 @@ void DisplayList(char **listHead)
 
 void StringListReplaceInStrings(char** listHead, string before, string after)
 {
-    if (!*listHead || !listHead)
+    if (!listHead || !*listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -168,14 +169,15 @@ static void swap(char ***a, char**&b)
 
 void StringListSort(char **listHead)
 {
-    if (!*listHead || !listHead)
+    if (!listHead ||  !*listHead)
     {
         printf("List is empty! Stop it!");
         return;
     }
     //Sorts the list 
     char **curNode = (char **)malloc(1);
-    if (!curNode) {
+    if (!curNode) 
+    {
         printf("Memory did not allocate!");
         return;
     }
@@ -213,7 +215,7 @@ void StringListSort(char **listHead)
 
 void StringListDestroy(char*** listHead)
 {
-    if (!*listHead || !listHead || !***listHead)
+    if (!listHead || !*listHead ||  !***listHead)
     {
         printf("List is empty! Stop it!");
         return;
@@ -232,13 +234,13 @@ void StringListDestroy(char*** listHead)
 
 void StringListRemoveDuplicates(char** listHead)
 {
-    if (!*listHead || !listHead)
+    if (!listHead || !*listHead)
     {
         printf("List is empty! Stop it!");
         return;
     }
     char **tempCheck = NULL;
-    char ** temp = listHead;
+    char **temp = listHead;
 
     while(temp != NULL && temp[1] != NULL)
     {
