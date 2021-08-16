@@ -1,7 +1,7 @@
 #include "list.h"
 
 void menu(char **listHead)
-{
+ {
     int choice = 0;
     
     while (choice != -1)
