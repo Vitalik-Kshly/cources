@@ -16,5 +16,4 @@
 *.sln
 Files
 *.enc
-Task3/x64
-Debug
+output.cpp
