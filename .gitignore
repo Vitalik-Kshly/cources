@@ -3,10 +3,11 @@
 *Tests
 *.gitignore
 *.sln
-*.vcxproj.filters
-*.vcxproj.user
-*.vcxproj
-*.json
+*/.vcxproj.filters
+*/.vcxproj.user
+*/.vcxproj
+*/.json
 *.vs
 Debug/
 *Files/
+*x64/
