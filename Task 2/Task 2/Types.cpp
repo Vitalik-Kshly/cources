@@ -1,27 +1,24 @@
 #include "Types.h"
-static std::string TypeNames[7]
-{
-	"There is no value!",
-	"Int",
-	"Char",
-	"Double",
-	"Bool",
-	"Float",
-	"UnsignedInt"
-};
 
-class TypeError : public std::exception 
+std::vector<std::string>g_TypeNames
 {
-	const char* what() const throw () 
-	{
-		return "Error!";
-	}
-public:
-	TypeError(std::string ErrorMsgTypes) 
-	{
-		cout << "TYPE ERROR! Cannot convert " + ErrorMsgTypes << std::endl;
-	}
+"There is no value!",
+"Int",
+"Char",
+"Double",
+"Bool",
+"Float",
+"UnsignedInt"
 };
+const char* TypeError::what() const throw ()
+{
+	return "Type error!\n";
+}
+
+TypeError::TypeError(std::string ErrorMsgTypes)
+{
+	cout << "Cannot convert " + ErrorMsgTypes << std::endl;
+}
 
 
 void Types::operator=( int i)
@@ -58,21 +55,6 @@ void Types::operator=(unsigned int i)
 	this->Type.typeUInt = i;
 	this->ChosenType = typeUInt;
 }
-
-Types::Types(Types& t) :
-	Type(t.Type),
-	ChosenType(t.ChosenType)
-{
-}
-
-Types::Types(Types&& t):
-	Type(t.Type),
-	ChosenType(t.ChosenType)
-{
-	std::move(t.Type);
-	std::move(t.ChosenType);
-}
-
 
 int Types::ToInt() 
 {
@@ -118,19 +100,19 @@ void Types::_isCorrectType(int type)
 {
 	if (type != this->ChosenType)
 	{
-		throw TypeError(TypeNames[this->ChosenType] + " to " + TypeNames[type]);
+		throw TypeError(g_TypeNames[this->ChosenType] + " to " + g_TypeNames[type]);
 	}
 }
 
-void Types::Swap(Types* a, Types* b)
+void Types::Swap(Types& a, Types& b)
 {
-	std::swap(a->ChosenType, b->ChosenType);
-	std::swap(a->Type, b->Type);
+	std::swap(a.ChosenType, b.ChosenType);
+	std::swap(a.Type, b.Type);
 }
 
 std::string Types::CurType()
 {
-	return TypeNames[this->ChosenType];
+	return g_TypeNames[this->ChosenType];
 }
 
 Types::~Types()

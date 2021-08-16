@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
+#include <vector>
+
 using std::cout;
 using std::cin;
-
+extern std::vector<std::string> g_TypeNames;
 union types
 {
 	int typeInteger;
@@ -14,6 +16,12 @@ union types
 	void* NoType;
 };
 
+class TypeError
+{
+public:
+	const char* what() const throw ();
+	TypeError(std::string ErrorMsgTypes);
+};
 enum TypesEnum
 {
 	NoType,
@@ -26,21 +34,19 @@ enum TypesEnum
 };
 
 
-
-
 class Types
 {
 public:
 	template <typename T>Types(T const i);
 	~Types();
+	Types(Types& t) = default;
+	Types(Types&& t) = default;
 	void operator=(int i);
 	void operator=(char i);
 	void operator=(double i);
 	void operator=(bool i);
 	void operator=(float i);
 	void operator=(unsigned int i);
-	Types(Types& t);
-	Types(Types&& t);
 	int ToInt();
 	unsigned int ToUInt();
 	char ToChar();
@@ -48,15 +54,13 @@ public:
 	float ToFloat();
 	bool ToBool();
 	void DestroyObj();
-
 	std::string CurType();
-	int ChosenType;
-	types Type;
-	static void Swap(Types* a, Types* b);
+	static void Swap(Types& a, Types& b);
+	
 private:
-	
 	void _isCorrectType(int type);
-	
+	types Type;
+	int ChosenType;
 };
 
 template <typename T>

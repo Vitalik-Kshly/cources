@@ -12,14 +12,19 @@ int main()
 	Types tBoolVal = Types(true);
 	Types tFloatVal = Types((float) 1.25);
 	Types tUintVal = Types((unsigned int)123);
-	
-	tintVal.DestroyObj();
-	//cout << tintVal.ToInt();
-	//cout << tCharVal.CurType();
 
-	//int intVal = tintVal.ToInt();
-	char CharVal = tCharVal.ToChar();
-	double DoubleVal = tDoubleVal.ToDouble();
+	try
+	{
+		double DoubleVal = tDoubleVal.ToInt();
+	}
+	catch (TypeError e)
+	{
+		cout << e.what();
+	}
+
+
+	tintVal.DestroyObj();
+
 	bool BoolVal = tBoolVal.ToBool();
 	float FloatVal = tFloatVal.ToFloat();
 	unsigned int UintVal = tUintVal.ToUInt();
