@@ -4,7 +4,6 @@ Scanner::Scanner(string path)
 {
 	_codeLines = _commentLines = _emptyLines = 0;
 	ChangePath(path);
-
 }
 
 void Scanner::ChangePath(string path)
@@ -25,7 +24,7 @@ void Scanner::ScanFile()
 
 	while (getline(_fileStream, line))
 	{
-		IndexOfCode = line.find_first_not_of(' ');
+		IndexOfCode = line.find_first_not_of(' \t');
 		IndexOfInlineComment = line.find("//");
 		IndexOfComment = line.find("/*");
 		
@@ -41,7 +40,7 @@ void Scanner::ScanFile()
 			_codeLines += _lineContainsCode(line);
 			while (inCommentBlock && getline(_fileStream, line))
 			{
-				IndexOfCode = line.find_first_not_of(' ');
+				IndexOfCode = line.find_first_not_of(' \t');
 				if (line.empty() || IndexOfCode == string::npos)
 				{
 					_emptyLines += 1;
@@ -78,7 +77,7 @@ void Scanner::_printLine(string line)
 
 bool Scanner::_lineContainsCode(string line, bool inCommentBlock)
 {
-	size_t IndexOfCode = line.find_first_not_of(' ');
+	size_t IndexOfCode = line.find_first_not_of(' \t');
 	size_t IndexOfInlineComment = line.find("//");
 	size_t IndexOfComment = line.find("/*");
 	size_t IndexOfCloseComment = line.rfind("*/");
@@ -98,7 +97,7 @@ bool Scanner::_lineContainsCode(string line, bool inCommentBlock)
 		return true;
 	}
 
-	return 0;
+	return false;
 }
 
 void Scanner::GetData(int& emptyLines, int& codeLines, int& commentLines)

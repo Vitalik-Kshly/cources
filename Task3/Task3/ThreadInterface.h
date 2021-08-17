@@ -9,6 +9,8 @@
 
 #include "Scanner.h"
 
+const int THREADS_COUNT = 5;
+
 namespace fs = std::filesystem;
 struct ThreadFile
 {

@@ -1,7 +1,7 @@
 #include "ThreadInterface.h"
 
 ThreadInterface::ThreadInterface(string dir) :
-    _threadsCount(5),
+    _threadsCount(THREADS_COUNT),
     _dir(dir),
     _iterFileStream(dir),
     _isEnd(false),
