@@ -5,6 +5,7 @@
 using std::cout;
 using std::cin;
 extern std::vector<std::string> g_TypeNames;
+
 union types
 {
 	int typeInteger;
@@ -22,6 +23,7 @@ public:
 	const char* what() const throw ();
 	TypeError(std::string ErrorMsgTypes);
 };
+
 enum TypesEnum
 {
 	NoType,
@@ -40,7 +42,7 @@ public:
 	template <typename T>Types(T const i);
 	~Types();
 	Types(Types& t) = default;
-	Types(Types&& t) = default;
+	Types(Types&& t);
 	void operator=(int i);
 	void operator=(char i);
 	void operator=(double i);

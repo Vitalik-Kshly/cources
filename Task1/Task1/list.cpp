@@ -56,7 +56,12 @@ void StringListRemove(char ***listHead, string str)
 
 void StringListAdd(char** listHead, string str)
 {
-    if (!listHead || !*listHead)
+    if (!listHead)
+    {
+        printf("Error Empty HEAD!");
+        return;
+    }
+    if (!*listHead)
     {
         *listHead = str;
         return;

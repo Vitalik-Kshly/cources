@@ -1,4 +1,3 @@
-#include "Scanner.h"
 #include "ThreadInterface.h"
 
 int main(int argc, char *argv[])
@@ -7,7 +6,7 @@ int main(int argc, char *argv[])
     if (argc == 1) 
     {
         cout << "StandartPath" << endl;
-        path = string("files/check");
+        path = string("files/small");
     }
     else
     {
@@ -16,7 +15,7 @@ int main(int argc, char *argv[])
     }
     cout << path << endl;
     ThreadInterface thread = ThreadInterface(path);
-    
+   
     thread.StartThread();
 
     return 0;

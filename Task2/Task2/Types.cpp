@@ -21,6 +21,13 @@ TypeError::TypeError(std::string ErrorMsgTypes)
 }
 
 
+Types::Types(Types&& t)
+{
+	this->ChosenType = std::move(t.ChosenType);
+	this->Type = std::move(t.Type);
+	t.DestroyObj();
+}
+
 void Types::operator=( int i)
 {
 	this->Type.typeInteger = i;

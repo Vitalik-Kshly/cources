@@ -42,12 +42,16 @@ private:
 	void _threadProcessing();
 	void _fileScanner(shared_ptr<ThreadFile>);
 	void _getFiles();
+	void _printFinalStats();
 	fs::recursive_directory_iterator _iterFileStream;
 	vector<shared_ptr<ThreadFile>> _threads;
 	vector<string> _processFiles;
-	vector<string> _fileExtensions;
+	const static vector<string> _fileExtensions;
 	mutex _threadLock;
 	ofstream _out;
 	clock_t _startClock, _endClock;
 	string _dir;
+	int _allCommentLines, _allEmptyLines, _allCodeLines, _allLines, _allFiles, _filesScanned;
 };
+
+

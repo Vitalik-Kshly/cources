@@ -110,5 +110,4 @@ void Scanner::GetData(int& emptyLines, int& codeLines, int& commentLines)
 void Scanner::PrintData()
 {
 	cout << "Empty :" << _emptyLines << "Code :" << _codeLines << "Comments :" << _commentLines << endl;
-
 }
